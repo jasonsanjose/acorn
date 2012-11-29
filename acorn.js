@@ -13,7 +13,22 @@
 //
 // [ghbt]: https://github.com/marijnh/acorn/issues
 
-(function(exports) {
+(function (root, factory) {
+  "use strict";
+
+  // Universal Module Definition (UMD)
+  // https://github.com/umdjs/umd/blob/master/commonjsStrict.js
+  if (typeof exports === "object") {
+    // CommonJS
+    factory(exports);
+  } else if (typeof define === "function" && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(["exports"]);
+  } else {
+    // Browser globals
+    factory((root.acorn = {}));
+  }
+}(this, function (exports) {
   "use strict";
 
   exports.version = "0.0.1";
@@ -1697,4 +1712,4 @@
     return finishNode(node, Syntax.Identifier);
   }
 
-})(typeof exports === "undefined" ? (window.acorn = {}) : exports);
+}));
